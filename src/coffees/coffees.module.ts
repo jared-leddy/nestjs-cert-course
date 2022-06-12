@@ -6,6 +6,7 @@ import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
 import { COFFEE_BRANDS } from './coffes.constants';
 
+// classes just used for example below
 class ConfigService {}
 class DevConfigService {}
 class ProdConfigService {}
@@ -17,8 +18,8 @@ class ProdConfigService {}
   providers: [
     CoffeesService,
     {
-      provide: COFFEE_BRANDS, // 👈
-      useValue: ['buddy brew', 'nescafe'], // array of coffee brands,
+      provide: 'COFFEE_BRANDS',
+      useFactory: () => ['buddy brew', 'nescafe'],
     },
     {
       provide: ConfigService,
