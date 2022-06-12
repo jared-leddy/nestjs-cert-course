@@ -18,7 +18,7 @@ class ProdConfigService {}
   providers: [
     CoffeesService,
     {
-      provide: 'COFFEE_BRANDS',
+      provide: COFFEE_BRANDS,
       useFactory: () => ['buddy brew', 'nescafe'],
     },
     {
