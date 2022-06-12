@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { DataSource, Repository } from 'typeorm';
@@ -16,6 +16,7 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
     private readonly connection: DataSource,
+    @Inject('COFFEE_BRANDS') coffeeBrands: string[],
   ) {}
 
   findAll(paginationQuery: PaginationQueryDto) {
