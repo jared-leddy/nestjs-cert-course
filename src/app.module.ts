@@ -10,16 +10,17 @@ import { DatabaseModule } from './database/database.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: 'config.env',
+      envFilePath: dynamicEnvFiles(),
+      // load: [appConfig], // used when a config.ts file is in place
     }),
     CoffeesModule,
     TypeOrmModule.forRoot({
       type: 'postgres', // type of our database
-      host: 'localhost', // database host
-      port: 5432, // database host
-      username: 'postgres', // username
-      password: 'pass123', // user password
-      database: 'postgres', // name of our database,
+      host: process.env.DATABASE_HOST, // database host
+      port: process.env.DATABASE_PORT, // database host
+      username: process.env.DATABASE_USER, // username
+      password: process.env.DATABASE_PASSWORD, // user password
+      database: process.env.DATABASE_NAME, // name of our database,
       autoLoadEntities: true, // models will be loaded automatically
       synchronize: true, // your entities will be synced with the database(recommended: disable in prod)
     }),
@@ -30,3 +31,10 @@ import { DatabaseModule } from './database/database.module';
   providers: [AppService],
 })
 export class AppModule {}
+
+function dynamicEnvFiles() {
+  if (process.env.NODE_ENV === 'development') {
+    return 'config.dev.env';
+  }
+  return 'config.prod.env';
+}
