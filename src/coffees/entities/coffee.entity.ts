@@ -23,4 +23,7 @@ export class Coffee {
     cascade: true, // 👈 or optionally just insert or update ['insert']
   })
   flavors: Flavor[];
+
+  @Column({ default: 0 })
+  recommendations: number;
 }
