@@ -5,6 +5,8 @@ import { CoffeesService } from './coffees.service';
 import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
 import { COFFEE_BRANDS } from './coffes.constants';
+import { ConfigModule } from '@nestjs/config';
+import coffeesConfig from './config/coffees.config';
 
 // classes just used for example below
 class ConfigService {}
@@ -14,7 +16,10 @@ class ProdConfigService {}
 @Module({
   controllers: [CoffeesController],
   exports: [CoffeesService],
-  imports: [TypeOrmModule.forFeature([Coffee, Event, Flavor])], // 👈 Adding Coffee Entity here to TypeOrmModule.forFeature
+  imports: [
+    TypeOrmModule.forFeature([Coffee, Event, Flavor]),
+    ConfigModule.forFeature(coffeesConfig),
+  ],
   providers: [
     CoffeesService,
     {
