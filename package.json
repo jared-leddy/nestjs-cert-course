@@ -20,7 +20,10 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "db:start": "docker-compose up -d",
-    "db:end": "docker-compose down"
+    "db:end": "docker-compose down",
+    "db:migrate:run": "npx typeorm migration:run -d dist/typeorm-cli.config",
+    "db:migrate:revert": "npx typeorm migration:revert -d dist/typeorm-cli.config",
+    "db:migrate:auto": "npm run build && npx typeorm migration:generate src/migrations/SchemaSync -d dist/typeorm-cli.config"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
