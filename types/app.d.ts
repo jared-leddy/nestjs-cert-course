@@ -6,5 +6,6 @@ namespace NodeJS {
     DATABASE_PASSWORD: string;
     DATABASE_NAME: string;
     NODE_ENV: string;
+    API_KEY: string;
   }
 }
